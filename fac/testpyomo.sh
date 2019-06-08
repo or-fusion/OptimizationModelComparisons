@@ -4,7 +4,7 @@
 #       of Pyomo with GURBOI.  But Pyomo buffers
 #       the solver I/O.
 #
-pyomo convert facility25.py --output=foo.lp  | ts -s
-pyomo convert facility50.py --output=foo.lp  | ts -s
-pyomo convert facility75.py --output=foo.lp  | ts -s
-pyomo convert facility100.py --output=foo.lp  | ts -s
+pyomo convert pyomo25.py --output=foo.lp  | ts -s
+pyomo convert pyomo50.py --output=foo.lp  | ts -s
+pyomo convert pyomo75.py --output=foo.lp  | ts -s
+pyomo convert pyomo100.py --output=foo.lp  | ts -s
