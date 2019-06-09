@@ -2,8 +2,8 @@ from pyomo.core import *
 
 model = ConcreteModel()
 
-model.n = 1000
-model.m = 1000
+model.n = 500
+model.m = 500
 model.dx = 1.0/model.n
 model.T = 1.58
 model.dt = model.T/model.n
@@ -11,7 +11,7 @@ model.h2 = model.dx**2
 model.a = 0.001
 
 model.ns = RangeSet(0, model.n)
-model.ms = RangeSet(0, model.n)
+model.ms = RangeSet(0, model.m)
 
 model.y = Var(model.ms, model.ns, bounds=(0.0, 1.0))
 model.u = Var(model.ms, bounds=(-1.0, 1.0))
@@ -36,7 +36,7 @@ model.pde = Constraint(RangeSet(0,model.n-1), RangeSet(1,model.n-1), rule=pde_ru
 
 def ic_rule(model, j):
   return model.y[0,j] == 0
-model.ic = Constraint(model.ns, rule=ic_rule)
+model.ic = Constraint(model.ms, rule=ic_rule)
 
 def bc1_rule(model, i):
   return model.y[i,  2] - 4*model.y[i, 1] + 3*model.y[i,0] == 0
