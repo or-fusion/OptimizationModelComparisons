@@ -3,7 +3,7 @@ import poek as pk
 
 model = pk.model()
 
-F = 25
+F = 50
 G = F + 1
 
 d = pk.variable()
