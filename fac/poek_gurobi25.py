@@ -3,7 +3,7 @@ import poek as pk
 
 model = pk.model()
 
-F = 100
+F = 25
 G = F
 G_ = G+1
 
@@ -52,4 +52,5 @@ for i,j,f in itertools.product(range(G_), range(G_), range(F)):
 for i,j,f in itertools.product(range(G_), range(G_), range(F)):
     model.add( r[i,j,f,1]**2 + r[i,j,f,2]**2 <= s[i,j,f]**2 )
 
-model.write("foo.lp")
+solver = pk.GurobiSolver()
+solver.solve(model)
