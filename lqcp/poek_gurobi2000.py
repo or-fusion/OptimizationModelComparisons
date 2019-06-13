@@ -11,12 +11,8 @@ dt = T/n
 h2 = dx**2
 a = 0.001
 
-y = {}
-for i, j in itertools.product(range(n+1), range(m+1)):
-    y[i, j] = pk.variable(lb=0.0, ub=1.0)
-u = {}
-for i in range(n+1):
-    u[i] = pk.variable(lb=-1.0, ub=1.0)
+y = pk.variable((n+1,m+1), lb=0.0, ub=1.0)
+u = pk.variable(n+1, lb=-1.0, ub=1.0)
 
 def yt(j, dx):
     return 0.5*(1 - (j*dx)*(j*dx))
