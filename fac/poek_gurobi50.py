@@ -8,24 +8,10 @@ G = F
 G_ = G+1
 
 d = pk.variable()
-
-y = {}
-for i in range(F):
-    y[i,1] = pk.variable(lb=0.0, ub=1.0)
-    y[i,2] = pk.variable(lb=0.0, ub=1.0)
-
-z = {}
-for i,j,f in itertools.product(range(G_), range(G_), range(F)):
-    z[i,j,f] = pk.variable(binary=True)
-
-s = {}
-for i,j,f in itertools.product(range(G_), range(G_), range(F)):
-    s[i,j,f] = pk.variable(lb=0.0)
-
-r = {}
-for i,j,f in itertools.product(range(G_), range(G_), range(F)):
-    r[i,j,f,1] = pk.variable()
-    r[i,j,f,2] = pk.variable()
+y = pk.variable((F,2), lb=0.0, ub=1.0)
+z = pk.variable((G_,G_,F), binary=True)
+s = pk.variable((G_,G_,F), lb=0.0)
+r = pk.variable((G_,G_,F,2))
 
 #obj
 model.add(d)
@@ -42,15 +28,15 @@ for i,j,f in itertools.product(range(G_), range(G_), range(F)):
 
 #quaddistk1
 for i,j,f in itertools.product(range(G_), range(G_), range(F)):
-    model.add( r[i,j,f,1] == i/G - y[f,1] )
+    model.add( r[i,j,f,0] == i/G - y[f,0] )
     
 #quaddistk2
 for i,j,f in itertools.product(range(G_), range(G_), range(F)):
-    model.add( r[i,j,f,2] == j/G - y[f,2] )
+    model.add( r[i,j,f,1] == j/G - y[f,1] )
 
 #quaddist
 for i,j,f in itertools.product(range(G_), range(G_), range(F)):
-    model.add( r[i,j,f,1]**2 + r[i,j,f,2]**2 <= s[i,j,f]**2 )
+    model.add( r[i,j,f,0]**2 + r[i,j,f,1]**2 <= s[i,j,f]**2 )
 
 solver = pk.GurobiSolver()
 solver.solve(model)
