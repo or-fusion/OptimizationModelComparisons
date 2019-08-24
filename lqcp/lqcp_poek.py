@@ -14,6 +14,8 @@ a = 0.001
 
 y = pk.variable((n+1,m+1), lb=0.0, ub=1.0)
 u = pk.variable(n+1, lb=-1.0, ub=1.0)
+model.use(y)
+model.use(u)
 
 def yt(j, dx):
     return 0.5*(1 - (j*dx)*(j*dx))
