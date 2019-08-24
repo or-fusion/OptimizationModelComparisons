@@ -14,6 +14,11 @@ y = pk.variable((F,2), lb=0.0, ub=1.0)
 z = pk.variable((G_,G_,F), binary=True)
 s = pk.variable((G_,G_,F), lb=0.0)
 r = pk.variable((G_,G_,F,2))
+model.use(d)
+model.use(y)
+model.use(z)
+model.use(s)
+model.use(r)
 
 #obj
 model.add(d)

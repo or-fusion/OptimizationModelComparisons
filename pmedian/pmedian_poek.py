@@ -19,6 +19,8 @@ for n in range(N):
 
 x = pk.variable((N,M), lb=0.0, ub=1.0, initial=0.0)
 y = pk.variable(N, lb=0.0, ub=1.0, initial=0.0)
+model.use(x)
+model.use(y)
 
 # obj
 model.add( sum(d[n,m]*x[n,m] for n in range(N) for m in range(M)) )
