@@ -1,9 +1,5 @@
 #!/bin/sh
 
-# BUILD
-#
-#  g++ -O2 lqcp.cpp -o lqcp -I$GUROBI_HOME/include -L$GUROBI_HOME/lib/ -lgurobi_c++ -lgurobi81
-
 echo "500"
 ./lqcp 500 | ts -s "%.s"
 
