@@ -1,9 +1,11 @@
+import sys
 from pyomo.core import *
+
 
 model = ConcreteModel()
 
-model.n = 500
-model.m = 500
+model.n = int(sys.argv[1])
+model.m = model.n
 model.dx = 1.0/model.n
 model.T = 1.58
 model.dt = model.T/model.n
@@ -45,3 +47,6 @@ model.bc1 = Constraint(RangeSet(1,model.n), rule=bc1_rule)
 def bc2_rule(model, i):
   return model.y[i,model.n-2] - 4*model.y[i,model.n-1] + 3*model.y[i,model.n-0] == (2*model.dx)*(model.u[i] - model.y[i,model.n-0])
 model.bc2 = Constraint(RangeSet(1,model.n), rule=bc2_rule)
+
+
+model.write('pyomo.lp')

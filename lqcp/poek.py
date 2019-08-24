@@ -1,10 +1,11 @@
+import sys
 import itertools
 import poek as pk
 
 model = pk.model()
 
-n = 1500
-m = 1500
+n = int(sys.argv[1])
+m = n
 dx = 1.0/n
 T = 1.58
 dt = T/n
@@ -43,4 +44,7 @@ for i in range(1, n+1):
 for i in range(1, n+1):
     model.add(y[i, n-2] - 4*y[i, n-1] + 3*y[i, n-0] == (2*dx)*(u[i] - y[i, n-0]))
 
-model.write("foo.lp")
+
+opt = pk.solver('gurobi')
+opt.set_option('TimeLimit', 0)
+opt.solve(model)

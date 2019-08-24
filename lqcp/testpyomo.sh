@@ -4,7 +4,7 @@
 #       of Pyomo with GURBOI.  But Pyomo buffers
 #       the solver I/O.
 #
-time (pyomo convert pyomo500.py --output=foo.lp  ; gurobi_cl timelimit=0 foo.lp)
-time (pyomo convert pyomo1000.py --output=foo.lp ; gurobi_cl timelimit=0 foo.lp)
-time (pyomo convert pyomo1500.py --output=foo.lp ; gurobi_cl timelimit=0 foo.lp)
-time (pyomo convert pyomo2000.py --output=foo.lp ; gurobi_cl timelimit=0 foo.lp)
+time (pyomo pyomo.py  500 ; gurobi_cl timelimit=0 pyomo.lp)
+time (pyomo pyomo.py 1000 ; gurobi_cl timelimit=0 pyomo.lp)
+time (pyomo pyomo.py 1500 ; gurobi_cl timelimit=0 pyomo.lp)
+time (pyomo pyomo.py 2000 ; gurobi_cl timelimit=0 pyomo.lp)
