@@ -24,7 +24,6 @@ int main(int argc, char** argv) {
 
   GRBEnv env;
   GRBModel model(env);
-  model.getEnv().set(GRB_DoubleParam_TimeLimit, 0);
 
   vector<vector<GRBVar> > y(m+1, vector<GRBVar>(n+1));
   for (int i = 0; i <= m; i++)
@@ -79,6 +78,7 @@ u[i]-y[i][n]);
   }
   
   
+  model.getEnv().set(GRB_DoubleParam_TimeLimit, 0);
   model.optimize();
 
   return 0;
