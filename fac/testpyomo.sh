@@ -3,8 +3,8 @@
 # NOTE: Writing an LP file is a lower bound on the runtime
 #       of Pyomo with GURBOI.  But Pyomo buffers
 #       the solver I/O.
-#
-time (pyomo convert pyomo25.py --output=foo.lp  ; gurobi_cl timelimit=0 foo.lp)
-time (pyomo convert pyomo50.py --output=foo.lp  ; gurobi_cl timelimit=0 foo.lp)
-time (pyomo convert pyomo75.py --output=foo.lp  ; gurobi_cl timelimit=0 foo.lp)
-time (pyomo convert pyomo100.py --output=foo.lp ; gurobi_cl timelimit=0 foo.lp)
+
+time (python facility_pyomo.py  25 ; gurobi_cl timelimit=0 pyomo.lp)
+time (python facility_pyomo.py  50 ; gurobi_cl timelimit=0 pyomo.lp)
+time (python facility_pyomo.py  74 ; gurobi_cl timelimit=0 pyomo.lp)
+time (python facility_pyomo.py 100 ; gurobi_cl timelimit=0 pyomo.lp)

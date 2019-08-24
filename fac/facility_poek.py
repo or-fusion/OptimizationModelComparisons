@@ -1,9 +1,11 @@
+import sys
 import itertools
 import poek as pk
 
+
 model = pk.model()
 
-F = 75
+F = int(sys.argv[1])
 G = F
 G_ = G+1
 
@@ -38,4 +40,7 @@ for i,j,f in itertools.product(range(G_), range(G_), range(F)):
 for i,j,f in itertools.product(range(G_), range(G_), range(F)):
     model.add( r[i,j,f,0]**2 + r[i,j,f,1]**2 <= s[i,j,f]**2 )
 
-model.write("foo.lp")
+
+opt = pk.solver('gurobi')
+opt.set_option('TimeLimit', 0)
+opt.solve(model)

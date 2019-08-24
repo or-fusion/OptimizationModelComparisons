@@ -21,7 +21,7 @@ int main(int argc, char** argv) {
   double h2 = dx*dx;
   double a = 0.001;
 
-  coek::CoekModel model;
+  coek::Model model;
 
   vector<vector<coek::Variable> > y(m+1, vector<coek::Variable>(n+1));
   for (int i = 0; i <= m; i++)
@@ -35,7 +35,7 @@ int main(int argc, char** argv) {
 
   // OBJECTIVE  
   // First term
-  coek::CoekExpr term1;
+  coek::Expression term1;
     term1 +=   ( y[m][0] - yt(0,dx) ) * ( y[m][0] - yt(0,dx) );
   for (int j = 1; j <= n-1; j++) {
     term1 += 2*( y[m][j] - yt(j,dx) ) * ( y[m][j] - yt(j,dx) );
@@ -43,7 +43,7 @@ int main(int argc, char** argv) {
     term1 +=   ( y[m][n] - yt(n,dx) ) * ( y[m][n] - yt(n,dx) );
 
   // Second term
-  coek::CoekExpr term2;
+  coek::Expression term2;
   for (int i = 1; i <= m-1; i++)
     term2 += 2*u[i]*u[i];
   term2 += u[m]*u[m];

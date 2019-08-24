@@ -1,9 +1,5 @@
 #!/bin/sh
 
-# BUILD
-#
-#  g++ -O2 facility.cpp -o facility -I$GUROBI_HOME/include -L$GUROBI_HOME/lib/ -lgurobi_c++ -lgurobi81
-
 echo "25"
 ./facility 25 25 | ts -s "%.s"
 

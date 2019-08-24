@@ -1,9 +1,10 @@
-from pyomo.core import *
+import sys
+from pyomo.environ import *
 
 model = AbstractModel()
 
-model.G = 75 #Param(within=PositiveIntegers)
-model.F = 75 #Param(within=PositiveIntegers)
+model.G = int(sys.argv[1]) #Param(within=PositiveIntegers)
+model.F = model.G #Param(within=PositiveIntegers)
 
 model.Grid = RangeSet(0, model.G)
 model.Facs = RangeSet(1, model.F)
@@ -24,6 +25,7 @@ def assmt_rule(mod, i, j):
 model.assmt = Constraint(model.Grid, model.Grid, rule=assmt_rule)
 
 M = 2*1.414
+
 def quadrhs_rule(mod,i,j,f):
     return mod.s[i,j,f] == mod.d + M*(1 - mod.z[i,j,f])
 model.quadrhs = Constraint(model.Grid, model.Grid, model.Facs, rule=quadrhs_rule)
