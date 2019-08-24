@@ -1,7 +1,7 @@
-#include "coek_model.hpp"
 #include <cmath>
 #include <cstdlib>
 #include <vector>
+#include "coek_model.hpp"
 using namespace std;
 
 double yt(int j, double dx) {
@@ -14,7 +14,6 @@ int main(int argc, char** argv) {
   int n = atoi(argv[1]);
   int m = n;
   int n1 = n-1;
-  int m1 = m-1;
   double dx = 1.0/n;
   double T = 1.58;
   double dt = T/m;
@@ -26,11 +25,11 @@ int main(int argc, char** argv) {
   vector<vector<coek::Variable> > y(m+1, vector<coek::Variable>(n+1));
   for (int i = 0; i <= m; i++)
     for (int j = 0; j <= n; j++)
-      y[i][j] = coek::Variable(0, 1, 0);
+      y[i][j] = model.getVariable(0, 1, 0);
   
   vector<coek::Variable> u(m+1);
   for (int i = 1; i <= m; i++) 
-    u[i] = coek::Variable(-1, 1, 0);
+    u[i] = model.getVariable(-1, 1, 0);
 
 
   // OBJECTIVE  
@@ -52,8 +51,8 @@ int main(int argc, char** argv) {
 
 
   // PDE
-  for (int i = 0; i <= m1; i++) {
-    for (int j = 1; j <= n1; j++) {
+  for (int i = 0; i < m; i++) {
+    for (int j = 1; j < n; j++) {
       model.add( y[i+1][j] - y[i][j] == dt*0.5/h2*(y[i][j-1] - 2*y[i][j] + y[i][j+1] + y[i+1][j-1] - 2*y[i+1][j] + y[i+1][j+1]) );
     }
   }
