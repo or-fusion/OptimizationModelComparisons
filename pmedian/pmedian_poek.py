@@ -30,8 +30,13 @@ for m in range(M):
     model.add( sum(x[n,m] for n in range(N)) == 1 )
 
 # bound_y
-for n,m in itertools(range(N), range(M)):
+for n,m in itertools.product(range(N), range(M)):
     model.add( x[n,m] - y[n] <= 0 )
 
 # num_facilities
 model.add( sum(y[n] for n in range(N)) == P )
+
+
+opt = pk.solver('gurobi')
+opt.set_option('TimeLimit', 0)
+opt.solve(model)
