@@ -10,13 +10,12 @@ int main(int argc, char *argv[])
 {
     // Load commandline arguments
     const int G = atoi(argv[1]);
-    const int F = atoi(argv[1]);
+    const int F = atoi(argv[2]);
     cout << "G: " << G << ", F: " << F << endl;
 
     // Setup Gurobi
     GRBEnv *env = new GRBEnv();
     GRBModel model = GRBModel(*env);
-    model.getEnv().set(GRB_DoubleParam_TimeLimit, 0);
 
     // Create variables
     GRBVar d = model.addVar(0,GRB_INFINITY,1.0,GRB_CONTINUOUS);
@@ -75,6 +74,10 @@ int main(int argc, char *argv[])
 
     model.update();
 
+    GRBLinExpr obj;
+    obj += d;
+    model.setObjective( obj );
+
     // Add constraints
 
     // Each customer is assigned to a facility
@@ -101,6 +104,8 @@ int main(int argc, char *argv[])
         }
     }
 
+
+    model.getEnv().set(GRB_DoubleParam_TimeLimit, 0);
     model.optimize();
 
     return 0;

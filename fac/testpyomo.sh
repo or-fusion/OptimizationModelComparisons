@@ -6,5 +6,5 @@
 
 time (python facility_pyomo.py  25 ; gurobi_cl timelimit=0 pyomo.lp)
 time (python facility_pyomo.py  50 ; gurobi_cl timelimit=0 pyomo.lp)
-time (python facility_pyomo.py  74 ; gurobi_cl timelimit=0 pyomo.lp)
+time (python facility_pyomo.py  75 ; gurobi_cl timelimit=0 pyomo.lp)
 time (python facility_pyomo.py 100 ; gurobi_cl timelimit=0 pyomo.lp)

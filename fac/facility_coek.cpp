@@ -1,7 +1,7 @@
-#include "coek_model.hpp"
 #include <cmath>
 #include <cstdlib>
 #include <vector>
+#include "coek_model.hpp"
 using namespace std;
 
 
@@ -9,13 +9,13 @@ int main(int argc, char *argv[])
 {
     // Load commandline arguments
     const int G = atoi(argv[1]);
-    const int F = atoi(argv[1]);
+    const int F = atoi(argv[2]);
     cout << "G: " << G << ", F: " << F << endl;
 
     coek::Model model;
 
     // Create variables
-    coek::Variable d(0, COEK_INFINITY, 1.0);
+    coek::Variable d = model.getVariable(0, COEK_INFINITY, 1.0);
     
     vector<vector<coek::Variable> > y;
     for (int f = 0; f < F; f++) {
@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
             z[i].push_back(vector<coek::Variable>());
             for (int f = 0; f < F; f++) {
                 z[i][j].push_back(
-                    model.getVariable(0, 1, 0, true)
+                    model.getVariable(0, 1, 0, true, false)
                 );
             }
         }
@@ -69,6 +69,10 @@ int main(int argc, char *argv[])
         }
     }
 
+    // Add objective
+
+    model.add( d );
+
     // Add constraints
 
     // Each customer is assigned to a facility
@@ -82,6 +86,7 @@ int main(int argc, char *argv[])
     }
 
     const double M = 2*sqrt(2.0);
+
     for (int i = 0; i <= G; i++) {
         for (int j = 0; j <= G; j++) {
             for (int f = 0; f < F; f++) {

@@ -1,10 +1,10 @@
 import sys
 from pyomo.environ import *
 
-model = AbstractModel()
+model = ConcreteModel()
 
-model.G = int(sys.argv[1]) #Param(within=PositiveIntegers)
-model.F = model.G #Param(within=PositiveIntegers)
+model.G = int(sys.argv[1])  #Param(within=PositiveIntegers)
+model.F = model.G           #Param(within=PositiveIntegers)
 
 model.Grid = RangeSet(0, model.G)
 model.Facs = RangeSet(1, model.F)
@@ -42,3 +42,5 @@ def quaddist_rule(mod,i,j,f):
     return mod.r[i,j,f,1]**2 + mod.r[i,j,f,2]**2 <= mod.s[i,j,f]**2
 model.quaddist = Constraint(model.Grid, model.Grid, model.Facs, rule=quaddist_rule)
 
+
+model.write("pyomo.lp")
