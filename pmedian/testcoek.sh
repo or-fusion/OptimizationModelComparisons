@@ -1,13 +1,13 @@
 #!/bin/sh
 
 echo "160 1"
-./pmedian_coek  160 1 | ts -s "%.s"
+time ./pmedian_coek  160 1
 
 echo "320 1"
-./pmedian_coek  320 1 | ts -s "%.s"
+time ./pmedian_coek  320 1
 
 echo "640 1"
-./pmedian_coek  640 1 | ts -s "%.s"
+time ./pmedian_coek  640 1
 
 echo "1280 1"
-./pmedian_coek 1280 1 | ts -s "%.s"
+time ./pmedian_coek 1280 1

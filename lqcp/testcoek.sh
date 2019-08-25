@@ -1,13 +1,13 @@
 #!/bin/sh
 
 echo "500"
-./lqcp_coek 500 | ts -s "%.s"
+time ./lqcp_coek 500
 
 echo "1000"
-./lqcp_coek 1000 | ts -s "%.s"
+time ./lqcp_coek 1000
 
 echo "1500"
-./lqcp_coek 1500 | ts -s "%.s"
+time ./lqcp_coek 1500
 
 echo "2000"
-./lqcp_coek 2000 | ts -s "%.s"
+time ./lqcp_coek 2000
