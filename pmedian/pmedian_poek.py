@@ -23,18 +23,18 @@ model.use(x)
 model.use(y)
 
 # obj
-model.add( sum(d[n,m]*x[n,m] for n in range(N) for m in range(M)) )
+model.add( pk.quicksum(d[n,m]*x[n,m] for n in range(N) for m in range(M)) )
 
 # single_x
 for m in range(M):
-    model.add( sum(x[n,m] for n in range(N)) == 1 )
+    model.add( pk.quicksum(x[n,m] for n in range(N)) == 1 )
 
 # bound_y
 for n,m in itertools.product(range(N), range(M)):
     model.add( x[n,m] - y[n] <= 0 )
 
 # num_facilities
-model.add( sum(y[n] for n in range(N)) == P )
+model.add( pk.quicksum(y[n] for n in range(N)) == P )
 
 
 opt = pk.solver('gurobi')
