@@ -25,7 +25,7 @@ model.add(d)
 
 #assmt
 for i,j in itertools.product(range(G_), range(G_)):
-    model.add( sum(z[i,j,f] for f in range(F)) == 1 )
+    model.add( pk.quicksum(z[i,j,f] for f in range(F)) == 1 )
 
 M = 2*1.414
 
