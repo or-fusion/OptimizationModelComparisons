@@ -1,6 +1,7 @@
 import sys
 import itertools
 import poek as pk
+quicksum = pk.quicksum
 
 model = pk.model()
 
@@ -23,10 +24,10 @@ def yt(j, dx):
 #obj
 model.add(0.25*dx*(
         (y[m, 0] - yt(0, dx))**2 +
-        2*sum((y[m, j] - yt(j, dx))**2 for j in range(1, n)) +
+        2*quicksum((y[m, j] - yt(j, dx))**2 for j in range(1, n)) +
         (y[m, n] - yt(n, dx))**2
     ) + 0.25*a*dt*(
-        2 * sum(u[i]**2 for i in range(1, m)) +
+        2 * quicksum(u[i]**2 for i in range(1, m)) +
         u[m]**2
     ))
 
