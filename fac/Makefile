@@ -17,4 +17,4 @@ run:
 	./testpyomo.sh > testpyomo.out 2>&1
 
 clean:
-	\rm -f facility facility_coek
+	\rm -f facility facility_coek *.out *.log *.csv

@@ -14,4 +14,4 @@ run:
 	./testpyomo.sh > testpyomo.out 2>&1
 
 clean:
-	\rm -f pmedian pmedian_coek
+	\rm -f pmedian pmedian_coek *.out *.log *.csv

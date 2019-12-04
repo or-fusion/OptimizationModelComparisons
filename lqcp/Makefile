@@ -14,4 +14,4 @@ run:
 	./testpyomo.sh > testpyomo.out 2>&1
 
 clean:
-	\rm -f lqcp lqcp_coek
+	\rm -f lqcp lqcp_coek *.out *.csv *.log
