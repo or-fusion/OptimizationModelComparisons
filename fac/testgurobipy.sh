@@ -1,13 +1,13 @@
 #!/bin/sh
 
 echo "25"
-(time -p python facility_gurobipy.py  25 25 ) > testgurobipy.25.out 2>&1
+time -p python facility_gurobipy.py  25 25 > testgurobipy.25.out 2>&1
 echo "50"
-(time -p python facility_gurobipy.py  50 50 ) > testgurobipy.50.out 2>&1
+time -p python facility_gurobipy.py  50 50 > testgurobipy.50.out 2>&1
 echo "75"
-(time -p python facility_gurobipy.py  75 75 ) > testgurobipy.75.out 2>&1
+time -p python facility_gurobipy.py  75 75 > testgurobipy.75.out 2>&1
 echo "100"
-(time -p python facility_gurobipy.py 100 100 ) > testgurobipy.100.out 2>&1
+time -p python facility_gurobipy.py 100 100 > testgurobipy.100.out 2>&1
 
 
 echo "size,gurobipy" > gurobipy.csv

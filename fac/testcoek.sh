@@ -1,13 +1,13 @@
 #!/bin/sh
 
 echo "25"
-(time -p ./facility_coek  25 25) > testcoek.25.out 2>&1
+time -p ./facility_coek  25 25 > testcoek.25.out 2>&1
 echo "50"
-(time -p ./facility_coek  50 50) > testcoek.50.out 2>&1
+time -p ./facility_coek  50 50 > testcoek.50.out 2>&1
 echo "75"
-(time -p ./facility_coek  75 75) > testcoek.75.out 2>&1
+time -p ./facility_coek  75 75 > testcoek.75.out 2>&1
 echo "100"
-(time -p ./facility_coek 100 100) > testcoek.100.out 2>&1
+time -p ./facility_coek 100 100 > testcoek.100.out 2>&1
 
 
 echo "size,coek" > coek.csv
