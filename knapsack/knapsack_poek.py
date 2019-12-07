@@ -18,6 +18,7 @@ for i in range(N):
     v[i] = random.uniform(0.0,1.0)
 
 x = pk.variable(N, lb=0.0, ub=1.0)
+model.use(x)
 
 model.add( pk.quicksum(v[i]*x[i] for i in range(N)) )
 model.add( pk.quicksum(w[i]*x[i] for i in range(N)) <= W )

@@ -1,3 +1,3 @@
 import facility_pyomo
 
-facility_pyomo.model.model.write('pyomo.lp')
+facility_pyomo.model.write('pyomo.lp')

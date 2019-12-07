@@ -18,6 +18,6 @@ model.v = Param(model.INDEX, initialize=lambda model, i : random.uniform(0.0,1.0
 
 model.x = Var(model.INDEX, bounds=(0.0,1.0))
 
-model.o = Objective(expr=sum(model.w[i]*model.x[i] for i in model.INDEX))
+model.o = Objective(expr=sum(model.v[i]*model.x[i] for i in model.INDEX))
 
-model.c = Constraint(expr=sum(model.v[i]*model.x[i] for i in model.INDEX) <= W)
+model.c = Constraint(expr=sum(model.w[i]*model.x[i] for i in model.INDEX) <= W)
