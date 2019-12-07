@@ -1,6 +1,15 @@
 #!/bin/sh
 
-time (python lqcp_pp.py  160 1 )
-time (python lqcp_pp.py  320 1 )
-time (python lqcp_pp.py  640 1 )
-time (python lqcp_pp.py 1280 1 )
+if [ "$1" == "" ]; then
+    suffix=""
+else
+    suffix="_$1"
+fi
+
+source ../run_problem.sh
+
+size=(500 1000 1500 2000)
+name="pp"
+command="python ./lqcp_${name}.py \$i"
+
+run_problem ${name}${suffix} "$command" ${size[@]}

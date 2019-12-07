@@ -38,6 +38,3 @@ model.bound_y = Constraint(model.Locations, model.Customers, rule=rule)
 def rule(model):
     return (sum( model.y[n] for n in model.Locations ) - model.P, 0.0)
 model.num_facilities = Constraint(rule=rule)
-
-
-model.write('pyomo.lp')

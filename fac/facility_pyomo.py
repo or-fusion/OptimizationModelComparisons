@@ -41,6 +41,3 @@ model.quaddistk2 = Constraint(model.Grid, model.Grid, model.Facs, rule=quaddistk
 def quaddist_rule(mod,i,j,f):
     return mod.r[i,j,f,1]**2 + mod.r[i,j,f,2]**2 <= mod.s[i,j,f]**2
 model.quaddist = Constraint(model.Grid, model.Grid, model.Facs, rule=quaddist_rule)
-
-
-model.write("pyomo.lp")

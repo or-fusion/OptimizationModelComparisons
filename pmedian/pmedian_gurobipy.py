@@ -16,9 +16,9 @@ for n in range(N):
     for m in range(M):
         d[n,m] = random.uniform(1.0,2.0)
 
-x = model.addVars(N, M, lb=0.0, ub=1.0, vtype='B')
+x = model.addVars(N, M, lb=0.0, ub=1.0, vtype='C')
 
-y = model.addVars(N, lb=0.0, ub=1.0, vtype='B')
+y = model.addVars(N, lb=0.0, ub=1.0, vtype='C')
 
 # obj
 model.setObjective( quicksum(d[n,m]*x[n,m] for n in range(N) for m in range(M)) )

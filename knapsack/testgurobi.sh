@@ -2,8 +2,8 @@
 
 source ../run_problem.sh
 
-size=(160 320 640 1280)
+size=(50000 100000 500000 1000000)
 name="gurobi"
-command="./pmedian \$i 1"
+command="./knapsack \$i"
 
 run_problem $name "$command" ${size[@]}

@@ -9,9 +9,11 @@ lqcp_coek: lqcp_coek.cpp
 
 run:
 	./testgurobi.sh > testgurobi.out 2>&1
-	./testpoek.sh > testpoek.out 2>&1
+	./testgurobipy.sh > testgurobipy.out 2>&1
 	./testcoek.sh > testcoek.out 2>&1
-	./testpyomo.sh > testpyomo.out 2>&1
+	./testpoek.sh > testpoek.out 2>&1
+	./testpp.sh > testpp.out 2>&1
+	./testpyomo1.sh > testpyomo1.out 2>&1
 
 clean:
-	\rm -f lqcp lqcp_coek *.out *.csv *.log
+	\rm -f lqcp lqcp_coek *.out *.csv *.log *.lp

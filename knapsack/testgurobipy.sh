@@ -2,8 +2,8 @@
 
 source ../run_problem.sh
 
-size=(160 320 640 1280)
+size=(50000 100000 500000 1000000)
 name="gurobipy"
-command="python ./pmedian_${name}.py \$i 1"
+command="python ./knapsack_${name}.py \$i"
 
 run_problem $name "$command" ${size[@]}
