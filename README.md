@@ -12,10 +12,10 @@ do provide a point of reference for different optimization modeling
 environments.  Specifically, this repository currently includes examples for the following modeling environments:
 - *Gurobi C++*
 - *Gurobi Python*
-- *COEK (a C++ modeling environment similar to Gurobi's)*
-- *POEK (a Python interface to COEK)*
-- *Pyomo*
-- JuMP (using Julia 0.4.3)
+- *COEK (a C++ modeling environment similar to Gurobi's)*   (see https://gitlab.com/coopr/coek)
+- *POEK (a Python interface to COEK)*  (see https://gitlab.com/coopr/poek)
+- *Pyomo*  (see https://github.com/Pyomo/pyomo)
+- JuMP
 - GAMS
 - AMPL
 - YALMIP
