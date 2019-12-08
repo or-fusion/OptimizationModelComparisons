@@ -6,8 +6,8 @@ import knapsack_pyomo
 
 
 model = pk.model()
-pk.util.pyomo_to_poek(knapsack_pyomo.model, model)
+pkmodel = pk.util.pyomo_to_poek(knapsack_pyomo.model)
 
 opt = pk.solver('gurobi')
 opt.set_option('TimeLimit', 0)
-opt.solve(model)
+opt.solve(pkmodel)
