@@ -71,7 +71,39 @@ in the file to allow comparison for different tests.
 
 ## Summarizing Tests
 
-TODO - we need to create a script to load the CSV files and summarize them in a table.  Maybe Pandas supports this?
+The `summarize.py` script can be used to generate tabular summaries of the performance
+tests for a specific problem. For example, if tests have been run for the `pmedian` test problem, then the command
+```
+python summarize.py pmedian
+```
+will process the CSV files in the `pmedian` directory and summarize their results.  For example:
+```
+Data Summary: pmedian
+
+Runtime Performance (seconds)
++------------+-------+---------+---------+---------+
+| Modeling   |   160 | 320     | 640     | 1280    |
+|------------+-------+---------+---------+---------|
+| coek       |  0.12 | 0.52    | 2.26    | 9.25    |
+| gurobi     |  0.11 | 0.44    | 1.82    | 7.47    |
+| gurobipy   |  0.82 | 3.28    | timeout | timeout |
+| poek       |  1.3  | 3.94    | timeout | timeout |
+| pp         |  3.98 | timeout | timeout | timeout |
+| pyomo1     |  3.54 | timeout | timeout | timeout |
++------------+-------+---------+---------+---------+
+
+Normalized Performance (relative to Gurobi)
++------------+-------+---------+---------+---------+
+| Modeling   |   160 | 320     | 640     | 1280    |
+|------------+-------+---------+---------+---------|
+| coek       |  1.09 | 1.18    | 1.24    | 1.24    |
+| gurobi     |  1    | 1.0     | 1.0     | 1.0     |
+| gurobipy   |  7.45 | 7.45    | timeout | timeout |
+| poek       | 11.82 | 8.95    | timeout | timeout |
+| pp         | 36.18 | timeout | timeout | timeout |
+| pyomo1     | 32.18 | timeout | timeout | timeout |
++------------+-------+---------+---------+---------+
+```
 
 # Installation
 
