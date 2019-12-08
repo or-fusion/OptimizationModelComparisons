@@ -3,7 +3,9 @@
 # NOTE: We want to run final tests with a timeout value of 10m
 # but for development purposes we may use a shorter limit.
 if [ "$TEST_TIMEOUT" == "" ]; then
-    TEST_TIMEOUT="10m"
+    timelimit="10m"
+else
+    timelimit="${TEST_TIMEOUT}s"
 fi
 
 function run_problem ()
@@ -18,7 +20,7 @@ echo "size,${name},status" > ${name}.csv
 for i in "${size[@]}"
 do
     echo "NAME $name  SIZE $i"
-    timeout $TEST_TIMEOUT time -p sh -c "${command//'$i'/$i}" > test${name}.${i}.out 2>&1
+    timeout $timelimit time -p sh -c "${command//'$i'/$i}" > test${name}.${i}.out 2>&1
     retval=$?
 
     status="ok"
