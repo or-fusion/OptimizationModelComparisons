@@ -1,3 +1,3 @@
 import lqcp_pyomo
 
-lqcp_pyomo.model.model.write('pyomo.lp')
+lqcp_pyomo.model.write('pyomo.lp')
