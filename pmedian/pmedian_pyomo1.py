@@ -1,3 +1,3 @@
 import pmedian_pyomo
 
-pmedian_pyomo.model.model.write('pyomo.lp')
+pmedian_pyomo.model.write('pyomo.lp')
