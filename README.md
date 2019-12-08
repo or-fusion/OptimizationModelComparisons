@@ -10,15 +10,16 @@ focus of this repository is on enabling performance comparisons, rather
 than critiquing modeling capabilities.  However, these test problems
 do provide a point of reference for different optimization modeling
 environments.  Specifically, this repository currently includes examples for the following modeling environments:
-- Gurobi C++
-- Gurobi Python
-- COEK (a C++ modeling environment similar to Gurobi's)
-- POEK (a Python interface to COEK)
-- Pyomo
+- *Gurobi C++*
+- *Gurobi Python*
+- *COEK (a C++ modeling environment similar to Gurobi's)*
+- *POEK (a Python interface to COEK)*
+- *Pyomo*
 - JuMP (using Julia 0.4.3)
 - GAMS
 - AMPL
 - YALMIP
+Note that the modeling environments highlighted here have mature testing scripts.
 
 # Performance Testing
 
