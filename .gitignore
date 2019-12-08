@@ -1,2 +1,4 @@
 *.out
 *.csv
+*.lp
+*.log
