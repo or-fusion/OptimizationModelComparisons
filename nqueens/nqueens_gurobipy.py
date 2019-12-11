@@ -1,38 +1,37 @@
 import sys
-import random
 from gurobipy import *
 
-random.seed(1000)
 
+model = Model("nqueens")
 
-model = Model("pmedian")
+N = int(sys.argv[1])
 
-N = int(sys.argv[1])    # Locations
-M = N                   # Customers
-P = int(sys.argv[2])    # Facilities
-
-d = {}
-for n in range(N):
-    for m in range(M):
-        d[n,m] = random.uniform(1.0,2.0)
-
-x = model.addVars(N, M, lb=0.0, ub=1.0, vtype='C')
-
-y = model.addVars(N, lb=0.0, ub=1.0, vtype='C')
+x = model.addVars(N, N, lb=0.0, ub=1.0, vtype='C')
 
 # obj
-model.setObjective( quicksum(d[n,m]*x[n,m] for n in range(N) for m in range(M)) )
+model.setObjective( quicksum(x[i,j] for i in range(N) for j in range(N)) )
 
-# single_x
-for m in range(M):
-    model.addConstr( quicksum(x[n,m] for n in range(N)) == 1 )
+# one per row
+for i in range(N):
+    model.addConstr( quicksum(x[i,j] for j in range(N)) == 1 )
 
-# bound_y
-for n,m in itertools.product(range(N), range(M)):
-    model.addConstr( x[n,m] - y[n] <= 0 )
+# one per column
+for j in range(N):
+    model.addConstr( quicksum(x[i,j] for i in range(N)) == 1 )
 
-# num_facilities
-model.addConstr( quicksum(y[n] for n in range(N)) == P )
+# \diagonals_col
+for i in range(N-1):
+    model.addConstr( x[0, i] + quicksum(x[j, i+j] for j in range(1, N-i)) <= 1 )
+# \diagonals_row
+for i in range(1, N-1):
+    model.addConstr( x[i, 0] + quicksum(x[i+j, j] for j in range(1, N-i)) <= 1 )
+
+# /diagonals_col
+for i in range(1,N):
+    model.addConstr( x[0, i] + quicksum(x[j, i-j] for j in range(1, i+1)) <= 1 )
+# /diagonals_row
+for i in range(1,N-1):
+    model.addConstr( x[i, N-1] + quicksum(x[i+j, N-1-j] for j in range(1, N-i)) <= 1)
 
 
 model.Params.TimeLimit = 0

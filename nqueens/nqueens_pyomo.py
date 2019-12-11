@@ -1,40 +1,45 @@
 import sys
 from pyomo.environ import *
-import random
-
-random.seed(1000)
 
 
 model = ConcreteModel()
 
-model.N = int(sys.argv[1])
+N = int(sys.argv[1])
 
-model.Locations = RangeSet(1,model.N)
+model.Rows = RangeSet(0,N-1)
+model.Cols = RangeSet(0,N-1)
 
-model.P = int(sys.argv[2])
+model.x = Var(model.Rows, model.Cols, within=Boolean)
 
-model.M = model.N
 
-model.Customers = RangeSet(1,model.M)
+# obj
+model.obj = Objective(expr=sum( model.x[i,j] for i in model.Rows for j in model.Cols) )
 
-model.d = Param(model.Locations, model.Customers, initialize=lambda n, m, model : random.uniform(1.0,2.0), within=Reals)
+# one per row
+def row_rule(model, i):
+    return sum(model.x[i,j] for j in range(N)) == 1
+model.row_rule = Constraint(model.Rows, rule=row_rule)
 
-model.x = Var(model.Locations, model.Customers, bounds=(0.0,1.0), initialize=0.0)
+def col_rule(model, j):
+    return sum(model.x[i,j] for i in range(N)) == 1
+model.col_rule = Constraint(model.Cols, rule=col_rule)
 
-model.y = Var(model.Locations, bounds=(0.0, 1.0), initialize=0.0)
+# \diagonals_col
+def ldiag_cols_rule(model, i):
+    return model.x[0, i] + sum(model.x[j, i+j] for j in range(1, N-i)) <= 1
+model.ldiag_cols = Constraint(range(N-1), rule=ldiag_cols_rule)
 
-def rule(model):
-    return sum( model.d[n,m]*model.x[n,m] for n in model.Locations for m in model.Customers )
-model.obj = Objective(rule=rule)
+# \diagonals_row
+def ldiag_rows_rule(model, i):
+    return model.x[i, 0] + sum(model.x[i+j, j] for j in range(1, N-i)) <= 1
+model.ldiag_rows = Constraint(range(1, N-1), rule=ldiag_rows_rule)
 
-def rule(model, m):
-    return (sum( model.x[n,m] for n in model.Locations ), 1.0)
-model.single_x = Constraint(model.Customers, rule=rule)
+# /diagonals_col
+def rdiag_cols_rule(model, i):
+    return model.x[0, i] + sum(model.x[j, i-j] for j in range(1, i+1)) <= 1
+model.rdiag_cols = Constraint(range(1,N), rule=rdiag_cols_rule)
 
-def rule(model, n,m):
-    return (None, model.x[n,m] - model.y[n], 0.0)
-model.bound_y = Constraint(model.Locations, model.Customers, rule=rule)
-
-def rule(model):
-    return (sum( model.y[n] for n in model.Locations ) - model.P, 0.0)
-model.num_facilities = Constraint(rule=rule)
+# /diagonals_row
+def rdiag_rows_rule(model, i):
+    return model.x[i, N-1] + sum(model.x[i+j, N-1-j] for j in range(1, N-i)) <= 1
+model.rdiag_rows = Constraint(range(1,N-1), rule=rdiag_rows_rule)

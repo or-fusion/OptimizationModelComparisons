@@ -1,62 +1,75 @@
 #include <map>
 #include <vector>
-#include <random>
-#include <functional>
 #include "coek_model.hpp"
 
 
 int main(int argc, char** argv)
 {
-int N = atoi(argv[1]);  // Locations
-int M = N;              // Customers
-int P = atoi(argv[2]);  // Facilities
-
-std::mt19937 rng(10000) ;
-std::uniform_real_distribution<double> distribution(1,2);
-auto uniform = std::bind( distribution, rng );
+int N = atoi(argv[1]);
 
 coek::Model model;
 
-std::vector<std::vector<double>> d(N, std::vector<double>(M));
-for (int n=0; n<N; n++)
-    for (int m=0; m<M; m++)
-        d[n][m] = uniform();
-
-std::vector<std::vector<coek::Variable>> x(N, std::vector<coek::Variable>(M));
-for (int n=0; n<N; n++)
-    for (int m=0; m<M; m++)
-        x[n][m] = model.getVariable(0,1,0);
-
-std::vector<coek::Variable> y(N);
-for (int n=0; n<N; n++)
-    y[n] = model.getVariable(0,1,0);
+std::vector<std::vector<coek::Variable>> x(N, std::vector<coek::Variable>(N));
+for (int i=0; i<N; i++)
+    for (int j=0; j<N; j++)
+        x[i][j] = model.getVariable(0,1,0,true,false);
 
 // obj
 coek::Expression obj;
-for (int n=0; n<N; n++)
-    for (int m=0; m<M; m++)
-        obj += d[n][m]*x[n][m];
+for (int i=0; i<N; i++)
+    for (int j=0; j<N; j++)
+        obj += x[i][j];
 model.add( obj );
 
-// single_x
-for (int m=0; m<M; m++) {
+// one per row
+for (int i=0; i<N; i++) {
     coek::Expression c;
-    for (int n=0; n<N; n++)
-        c += x[n][m];
+    for (int j=0; j<N; j++)
+        c += x[i][j];
     model.add( c == 1 );
     }
 
-// bound_y
-for (int n=0; n<N; n++)
-    for (int m=0; m<M; m++)
-        model.add( x[n][m] - y[n] <= 0 );
+// one per column
+for (int j=0; j<N; j++) {
+    coek::Expression c;
+    for (int i=0; i<N; i++)
+        c += x[i][j];
+    model.add( c == 1 );
+    }
 
-// num_facilities
-coek::Expression num_facilities;
-for (int n=0; n<N; n++)
-    num_facilities += y[n];
-model.add( num_facilities == P );
+// \diagonals_col
+for (int i=0; i<N-1; i++) {
+    coek::Expression c;
+    c += x[0][i];
+    for (int j=1; j<N-i; j++)
+        c += x[j][i+j];
+    model.add( c <= 1 );
+    }
+// \diagonals_row
+for (int i=1; i<N-1; i++) {
+    coek::Expression c;
+    c += x[i][0];
+    for (int j=1; j<N-i; j++)
+        c += x[i+j][j];
+    model.add( c <= 1 );
+    }
 
+// /diagonals_col
+for (int i=1; i<N; i++) {
+    coek::Expression c;
+    c += x[0][i];
+    for (int j=1; j<=i; j++)
+        c += x[j][i-j];
+    model.add( c <= 1 );
+    }
+// /diagonals_row
+for (int i=1; i<N-1; i++) {
+    coek::Expression c;
+    c += x[i][N-1];
+    for (int j=1; j<N-i; j++)
+        c += x[i+j][N-1-j];
+    model.add( c <= 1 );
+    }
 
 coek::Solver opt;
 opt.initialize("gurobi");
@@ -65,3 +78,5 @@ opt.solve(model);
 
 return 0;
 }
+
+

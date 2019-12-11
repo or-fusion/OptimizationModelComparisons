@@ -8,7 +8,7 @@ fi
 
 source ../run_problem.sh
 
-size=(160 320 640 1280)
+size=(400 600 800 1000)
 name="pp"
 command="python ./nqueens_${name}.py \$i 1"
 

@@ -1,11 +1,13 @@
 
+#IPOPT_LIBS=-L${IPOPT_HOME}/lib -L${IPOPT_HOME}/Ipopt/ThirdParty/Mumps/lib -lipopt -lcoinmumps -lgfortran
+
 all: nqueens nqueens_coek
 
 nqueens: nqueens.cpp
 	c++ -O3 nqueens.cpp -o nqueens -I${GUROBI_HOME}/include -L${GUROBI_HOME}/lib/ -lgurobi_c++ -lgurobi81
 
 nqueens_coek: nqueens_coek.cpp
-	g++ -std=c++11 -O3 nqueens_coek.cpp -o nqueens_coek  -L${GUROBI_HOME}/lib/ -I${COEK_HOME}/include -L${COEK_HOME}/lib/ -lcoek -lgurobi_g++5.2 -lgurobi81
+	g++ -std=c++11 -O3 nqueens_coek.cpp -o nqueens_coek  -L${GUROBI_HOME}/lib/ -I${COEK_HOME}/include -L${COEK_HOME}/lib/ -lcoek ${IPOPT_LIBS} -lgurobi_g++5.2 -lgurobi81
 
 run:
 	./testgurobi.sh > testgurobi.out 2>&1

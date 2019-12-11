@@ -1,3 +1,3 @@
-import pmedian_pyomo
+import nqueens_pyomo
 
-pmedian_pyomo.model.write('pyomo.lp')
+nqueens_pyomo.model.write('pyomo.lp')
