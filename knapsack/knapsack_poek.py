@@ -5,7 +5,7 @@ import poek as pk
 
 random.seed(1000)
 
-N = int(sys.argv[1])
+N = int(sys.argv[1])*1000
 W = N/10.0
 
 

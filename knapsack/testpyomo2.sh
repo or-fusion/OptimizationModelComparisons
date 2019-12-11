@@ -8,7 +8,7 @@ fi
 
 source ../run_problem.sh
 
-size=(50000 100000 500000 1000000)
+size=(50 100 500 1000)
 name="pyomo2"
 command="python ./knapsack_${name}.py \$i 1"
 

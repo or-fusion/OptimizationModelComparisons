@@ -7,7 +7,7 @@
 
 int main(int argc, char** argv)
 {
-int N = atoi(argv[1]);
+int N = atoi(argv[1])*1000;
 double W = N/10.0;
 
 std::mt19937 rng(10000) ;

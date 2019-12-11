@@ -4,7 +4,7 @@ from gurobipy import *
 
 random.seed(1000)
 
-N = int(sys.argv[1])
+N = int(sys.argv[1])*1000
 W = N/10.0
 
 model = Model("knapsack")
