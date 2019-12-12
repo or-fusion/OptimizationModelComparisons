@@ -1,8 +1,10 @@
+import sys
 from pyomo.environ import *
 
-model = AbstractModel()
 
-model.N = Param(within=PositiveIntegers)
+model = ConcreteModel()
+
+model.N = Param(within=PositiveIntegers, initialize=int(sys.argv[1]))
 model.h = 1.0/model.N
 
 model.VarIdx = RangeSet(model.N+1)
