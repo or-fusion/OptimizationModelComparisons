@@ -3,7 +3,7 @@
 name=$1
 suffix=$2
 
-for dir in pmedian knapsack nqueens lqcp fac
+for dir in clnlbeam fac knapsack lqcp nqueens pmedian
 do
   echo $dir
   cd $dir
