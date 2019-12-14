@@ -12,4 +12,4 @@ run:
 	./testpyomo2.sh > testpyomo2.out 2>&1
 
 clean:
-	\rm -f clnlbeam_coek *.out *.log *.csv *.lp
+	\rm -f clnlbeam_coek *.out *.log *.csv *.nl

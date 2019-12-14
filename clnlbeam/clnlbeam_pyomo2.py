@@ -1,5 +1,5 @@
 import clnlbeam_pyomo
 from pyomo.environ import SolverFactory
 
-solver = SolverFactory("gurobi")
-solver.solve(clnlbeam_pyomo.model.write, timelimit=0)
+solver = SolverFactory("ipopt")
+solver.solve(clnlbeam_pyomo.model, timelimit=0, tee=True)

@@ -28,6 +28,6 @@ for i in range(N):
     model.add( t[i+1] - t[i] - (0.5*h)*u[i+1] - (0.5*h)*u[i] == 0 )
 
 
-opt = pk.solver('gurobi')
+opt = pk.solver('ipopt')
 opt.set_option('TimeLimit', 0)
 opt.solve(model)
