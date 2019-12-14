@@ -1,0 +1,13 @@
+#!/bin/sh
+
+name=$1
+suffix=$2
+
+for dir in pmedian knapsack nqueens lqcp fac
+do
+  echo $dir
+  cd $dir
+  ./test${name}.sh $2
+  cd ..
+done
+
