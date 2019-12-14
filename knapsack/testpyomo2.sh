@@ -10,6 +10,9 @@ source ../run_problem.sh
 
 size=(50 100 500 1000)
 name="pyomo2"
-command="python ./knapsack_${name}.py \$i 1"
 
+command="python ./knapsack_${name}.py \$i 1"
 run_problem ${name}${suffix} "$command" ${size[@]}
+
+command="pypy3 ./knapsack_${name}.py \$i 1"
+run_problem ${name}${suffix}_pypy3 "$command" ${size[@]}
