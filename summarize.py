@@ -42,7 +42,9 @@ for problem in sorted(problems):
     for size in sizes:
         results[str(size)].append( data.get((problem,size), "missing") )
 
+print("-"*70)
 print("Data Summary: "+sys.argv[1])
+print("-"*70)
 
 print("")
 print("Runtime Performance (seconds)")
