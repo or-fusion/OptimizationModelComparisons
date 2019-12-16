@@ -1,5 +1,5 @@
 
-#IPOPT_LIBS=-L${IPOPT_HOME}/lib -L${IPOPT_HOME}/Ipopt/ThirdParty/Mumps/lib -lipopt -lcoinmumps -lgfortran
+IPOPT_LIBS=-L${IPOPT_HOME}/lib -L${IPOPT_HOME}/include -lipopt -lcoinmumps -lgfortran
 
 all: nqueens nqueens_coek
 
