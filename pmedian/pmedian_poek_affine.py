@@ -2,7 +2,6 @@ import sys
 import random
 import itertools
 import poek as pk
-quicksum = pk.quicksum
 
 random.seed(1000)
 
@@ -24,18 +23,18 @@ model.use(x)
 model.use(y)
 
 # obj
-model.add( quicksum(d[n,m]*x[n,m] for n in range(N) for m in range(M)) )
+model.add( pk.affine_expression([d[n,m] for n in range(N) for m in range(M)], [x[n,m] for n in range(N) for m in range(M)]) )
 
 # single_x
 for m in range(M):
-    model.add( quicksum(x[n,m] for n in range(N)) == 1 )
+    model.add( pk.affine_expression([x[n,m] for n in range(N)]) == 1 )
 
 # bound_y
 for n,m in itertools.product(range(N), range(M)):
-    model.add( x[n,m] - y[n] <= 0 )
+    model.add( pk.affine_expression((1,-1), (x[n,m],y[n])) <= 0 )
 
 # num_facilities
-model.add( quicksum(y[n] for n in range(N)) == P )
+model.add( pk.affine_expression([y[n] for n in range(N)]) == P )
 
 
 opt = pk.solver('gurobi')

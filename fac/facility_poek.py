@@ -1,6 +1,7 @@
 import sys
 import itertools
 import poek as pk
+quicksum = pk.quicksum
 
 
 model = pk.model()
@@ -25,7 +26,7 @@ model.add(d)
 
 #assmt
 for i,j in itertools.product(range(G_), range(G_)):
-    model.add( pk.quicksum(z[i,j,f] for f in range(F)) == 1 )
+    model.add( quicksum(z[i,j,f] for f in range(F)) == 1 )
 
 M = 2*1.414
 
