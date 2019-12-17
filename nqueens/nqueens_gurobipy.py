@@ -1,6 +1,6 @@
 import sys
-from gurobipy import *
 
+from gurobipy import Model, quicksum
 
 model = Model("nqueens")
 
@@ -9,31 +9,30 @@ N = int(sys.argv[1])
 x = model.addVars(N, N, lb=0.0, ub=1.0, vtype='C')
 
 # obj
-model.setObjective( quicksum(x[i,j] for i in range(N) for j in range(N)) )
+model.setObjective(x.sum())
 
 # one per row
-for i in range(N):
-    model.addConstr( quicksum(x[i,j] for j in range(N)) == 1 )
+model.addConstrs((x.sum(i, '*') == 1 for i in range(N)))
 
 # one per column
-for j in range(N):
-    model.addConstr( quicksum(x[i,j] for i in range(N)) == 1 )
+model.addConstrs((x.sum('*', j) == 1 for j in range(N)))
 
 # \diagonals_col
-for i in range(N-1):
-    model.addConstr( x[0, i] + quicksum(x[j, i+j] for j in range(1, N-i)) <= 1 )
+model.addConstrs((x[0, i] + quicksum(x[j, i + j]
+                                     for j in range(1, N - i)) <= 1
+                  for i in range(N - 1)))
 # \diagonals_row
-for i in range(1, N-1):
-    model.addConstr( x[i, 0] + quicksum(x[i+j, j] for j in range(1, N-i)) <= 1 )
-
+model.addConstrs((x[i, 0] + quicksum(x[i + j, j]
+                                     for j in range(1, N - i)) <= 1
+                  for i in range(1, N - 1)))
 # /diagonals_col
-for i in range(1,N):
-    model.addConstr( x[0, i] + quicksum(x[j, i-j] for j in range(1, i+1)) <= 1 )
+model.addConstrs((x[0, i] + quicksum(x[j, i - j]
+                                     for j in range(1, i + 1)) <= 1
+                  for i in range(1, N)))
 # /diagonals_row
-for i in range(1,N-1):
-    model.addConstr( x[i, N-1] + quicksum(x[i+j, N-1-j] for j in range(1, N-i)) <= 1)
-
+model.addConstrs((x[i, N - 1] + quicksum(x[i + j, N - 1 - j]
+                                         for j in range(1, N - i)) <= 1
+                  for i in range(1, N)))
 
 model.Params.TimeLimit = 0
 model.optimize()
-

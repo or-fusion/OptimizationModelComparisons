@@ -86,7 +86,8 @@ Runtime Performance (seconds)
 |------------+-------+---------+---------+---------|
 | coek       |  0.12 | 0.52    | 2.26    | 9.25    |
 | gurobi     |  0.11 | 0.44    | 1.82    | 7.47    |
-| gurobipy   |  0.82 | 3.28    | timeout | timeout |
+| gurobipy   |  0.51 | 2.09    | 12.37   | 44.23   |
+| pulp       |  2.15 | 8.4     | 38.76   | 161.57  |
 | poek       |  1.3  | 3.94    | timeout | timeout |
 | pp         |  3.98 | timeout | timeout | timeout |
 | pyomo1     |  3.54 | timeout | timeout | timeout |

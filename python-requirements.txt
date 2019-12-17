@@ -1,0 +1,5 @@
+PuLP>=2.0
+pandas>=0.25.3
+# gurobipy>=5.0.2
+pyomo>=5.6.8
+tabulate>=0.8.6
