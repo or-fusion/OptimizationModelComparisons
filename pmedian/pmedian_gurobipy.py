@@ -1,8 +1,5 @@
 import sys
-import random
 from gurobipy import Model
-
-random.seed(1000)
 
 model = Model("pmedian")
 
@@ -10,7 +7,7 @@ N = int(sys.argv[1])  # Locations
 M = N  # Customers
 P = int(sys.argv[2])  # Facilities
 
-d = {(n, m): random.uniform(1.0, 2.0) for n in range(N) for m in range(M)}
+d = {(n, m): 1.0+1.0/(n+m+1) for n in range(N) for m in range(M)}
 
 x = model.addVars(d.keys(), lb=0.0, ub=1.0, vtype='C')
 

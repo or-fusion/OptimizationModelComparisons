@@ -1,9 +1,6 @@
 import sys
 from pyomo.environ import *
-import random
 from pyomo.core.expr.numeric_expr import LinearExpression
-
-random.seed(1000)
 
 ones = [1]*int(sys.argv[1])
 
@@ -20,7 +17,7 @@ model.M = model.N
 
 model.Customers = RangeSet(1,model.M)
 
-model.d = Param(model.Locations, model.Customers, initialize=lambda n, m, model : random.uniform(1.0,2.0), within=Reals)
+model.d = Param(model.Locations, model.Customers, initialize=lambda n, m, model : 1.0+1.0/(n+m+1), within=Reals)
 
 model.x = Var(model.Locations, model.Customers, bounds=(0.0,1.0), initialize=0.0)
 

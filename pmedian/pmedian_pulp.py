@@ -1,17 +1,14 @@
-import random
 import sys
 
 from pulp import GUROBI, LpMinimize, LpProblem, LpVariable, lpSum
 
-random.seed(1000)
-
 model = LpProblem("pmedian", LpMinimize)
 
 N = int(sys.argv[1])  # Locations
-M = N  # Customers
+M = N                 # Customers
 P = int(sys.argv[2])  # Facilities
 
-d = {(n, m): random.uniform(1.0, 2.0) for n in range(N) for m in range(M)}
+d = {(n, m): 1.0+1.0/(n+m+1) for n in range(N) for m in range(M)}
 
 x = LpVariable.dicts("x", d.keys(), lowBound=0.0, upBound=1.0, cat="Continuous")
 
