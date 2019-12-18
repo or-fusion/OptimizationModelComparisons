@@ -1,27 +1,24 @@
-import sys
 import random
-from gurobipy import *
+import sys
+
+from gurobipy import Model
 
 random.seed(1000)
 
-N = int(sys.argv[1])*1000
-W = N/10.0
+N = int(sys.argv[1]) * 1000
+W = N / 10.0
 
 model = Model("knapsack")
 
-w = {}
-v = {}
-for i in range(N):
-    w[i] = random.uniform(0.0,1.0)
-    v[i] = random.uniform(0.0,1.0)
+# Weights
+w = {i: random.uniform(0.0, 1.0) for i in range(N)}
+# Costs
+v = {i: random.uniform(0.0, 1.0) for i in range(N)}
 
-x = model.addVars(N, lb=0.0, ub=1.0, vtype='C')
-
-model.setObjective( quicksum(v[i]*x[i] for i in range(N)) )
-
-model.addConstr( quicksum(w[i]*x[i] for i in range(N)) <= W )
-
+# Add vars with objective coefficients
+x = model.addVars(v.keys(), lb=0.0, ub=1.0, vtype='C', obj=v.values())
+# Capacity
+model.addConstr(x.prod(w) <= W)
 
 model.Params.TimeLimit = 0
 model.optimize()
-
