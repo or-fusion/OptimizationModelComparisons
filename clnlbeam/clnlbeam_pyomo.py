@@ -16,13 +16,9 @@ model.u = Var(model.VarIdx, initialize=0.01)
 alpha = 350
 
 def c_rule(m):
-    ex = 0
-    for i in m.VarIdx:
-        if i == m.N+1:
-            continue
-        ex += 0.5*m.h*(m.u[i+1]**2+m.u[i]**2) + 0.5*alpha*m.h*(cos(m.t[i+1])+cos(m.t[i]))
-    return ex
-
+    return quicksum(0.5*m.h*(m.u[i+1]**2+m.u[i]**2) +
+                    0.5*alpha*m.h*(cos(m.t[i+1])+cos(m.t[i])) \
+                    for i in m.VarIdx if i != m.N+1)
 model.c = Objective(rule=c_rule)
 
 def cons1_rule(m, i):
