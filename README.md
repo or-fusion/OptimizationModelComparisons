@@ -10,16 +10,18 @@ focus of this repository is on enabling performance comparisons, rather
 than critiquing modeling capabilities.  However, these test problems
 do provide a point of reference for different optimization modeling
 environments.  Specifically, this repository currently includes examples for the following modeling environments:
-- *Gurobi C++*
-- *Gurobi Python*
-- *COEK (a C++ modeling environment similar to Gurobi's)*   (see https://gitlab.com/coopr/coek)
-- *POEK (a Python interface to COEK)*  (see https://gitlab.com/coopr/poek)
-- *Pyomo*  (see https://github.com/Pyomo/pyomo)
+- **_Gurobi C++_**
+- **_Gurobi Python_**
+- **_COEK_**  (a C++ modeling environment similar to Gurobi's)  (see https://gitlab.com/coopr/coek)
+- **_POEK_** (a Python interface to COEK)  (see https://gitlab.com/coopr/poek)
+- **_Pyomo_** (see https://github.com/Pyomo/pyomo)
 - JuMP
 - GAMS
 - AMPL
 - YALMIP
 - PuLP
+- or-tools Python (see https://github.com/google/or-tools)
+- or-tools C++ (to appear)
 
 Note that the modeling environments highlighted here have mature testing scripts.
 
@@ -89,6 +91,7 @@ Runtime Performance (seconds)
 | coek       |  0.12 | 0.52    | 2.26    | 9.25    |
 | gurobi     |  0.11 | 0.44    | 1.82    | 7.47    |
 | gurobipy   |  0.51 | 2.09    | 12.37   | 44.23   |
+| ortoolspy  |  0.65 | 2.85    | 12.84   | 55.12   |
 | pulp       |  2.15 | 8.4     | 38.76   | 161.57  |
 | poek       |  1.3  | 3.94    | timeout | timeout |
 | pp         |  3.98 | timeout | timeout | timeout |
