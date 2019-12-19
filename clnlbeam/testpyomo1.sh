@@ -10,6 +10,6 @@ source ../run_problem.sh
 
 size=(5 50 500)
 name="pyomo1"
-command="sh -c \"python ./clnlbeam_${name}.py \$i 1; ipopt timelimit=0 pyomo.nl\""
+command="sh -c \"python ./clnlbeam_${name}.py \$i; ipopt timelimit=0 pyomo.nl\""
 
 run_problem ${name}${suffix} "$command" ${size[@]}
