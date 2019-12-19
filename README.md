@@ -25,6 +25,11 @@ Note that the modeling environments highlighted here have mature testing scripts
 
 ## Overview
 
+This repository generalizes the previous tests to include several different test categories:
+- construct:  Tests that construct a model and call a solver to preliminary setup of the solver data structures
+- solve:  Tests that construct and solve a model, which tests the time needed to process solver output
+- resolve:  Tests that iteratively resolve a problem whose parameters change
+
 One important deviation from the original repository concerns the
 timing methodology.  The data reported in the JuMP paper used the ``ts``
 command-line utility, which measures the wallclock time and annotates
