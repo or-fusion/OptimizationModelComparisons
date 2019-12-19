@@ -1,7 +1,5 @@
 #include <map>
 #include <vector>
-#include <random>
-#include <functional>
 #include "coek_model.hpp"
 
 
@@ -11,16 +9,12 @@ int N = atoi(argv[1]);  // Locations
 int M = N;              // Customers
 int P = atoi(argv[2]);  // Facilities
 
-std::mt19937 rng(10000) ;
-std::uniform_real_distribution<double> distribution(1,2);
-auto uniform = std::bind( distribution, rng );
-
 coek::Model model;
 
 std::vector<std::vector<double>> d(N, std::vector<double>(M));
 for (int n=0; n<N; n++)
     for (int m=0; m<M; m++)
-        d[n][m] = uniform();
+        d[n][m] = 1.0+1.0/(n+m+1);
 
 std::vector<std::vector<coek::Variable>> x(N, std::vector<coek::Variable>(M));
 for (int n=0; n<N; n++)

@@ -10,6 +10,6 @@ source ../run_problem.sh
 
 size=(5 50 500)
 name="poek"
-command="python ./clnlbeam_${name}.py \$i 1"
+command="python ./clnlbeam_${name}.py \$i"
 
 run_problem ${name}${suffix} "$command" ${size[@]}

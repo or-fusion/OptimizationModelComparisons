@@ -1,10 +1,7 @@
 import sys
-import random
 import itertools
 import poek as pk
 quicksum = pk.quicksum
-
-random.seed(1000)
 
 
 model = pk.model()
@@ -16,7 +13,7 @@ P = int(sys.argv[2])    # Facilities
 d = {}
 for n in range(N):
     for m in range(M):
-        d[n,m] = random.uniform(1.0,2.0)
+        d[n,m] = 1.0+1.0/(n+m+1)
 
 x = pk.variable((N,M), lb=0.0, ub=1.0, initial=0.0)
 y = pk.variable(N, lb=0.0, ub=1.0, initial=0.0)

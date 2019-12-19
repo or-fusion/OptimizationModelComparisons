@@ -67,10 +67,10 @@ if "gurobi" in problems:
         for problem in sorted(problems):
             try:
                 pval = float(results[size_str][i])
+                results[size_str][i] = round(pval/gval,2)
             except ValueError:
                 # We just skip data that isn't numeric
-                continue
-            results[size_str][i] = round(pval/gval,2)
+                pass
             i = i+1
 
     print("")
