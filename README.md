@@ -47,7 +47,32 @@ The following test problems have mature performance testing scripts:
 - lqcp: A linear quadratic control problem
 - facility: A quadratic facility location problem
 
-## Running Tests
+### Construct Results
+
+The following results determine the runtimes for the creation in the different modelling tools and languages for specific problems.
+
+#### pmedian
+
+Runtime Performance (seconds)
+
+| Modeling   |   160 | 320     | 640     | 1280    |
+|------------|-------|---------|---------|---------|
+| coek       |  0.12 | 0.52    | 2.26    | 9.25    |
+| gurobi     |  0.11 | 0.44    | 1.82    | 7.47    |
+| gurobipy   |  0.51 | 2.09    | 12.37   | 44.23   |
+| ortoolspy  |  0.65 | 2.85    | 12.84   | 55.12   |
+| pulp       |  2.15 | 8.4     | 38.76   | 161.57  |
+| poek       |  1.3  | 3.94    | timeout | timeout |
+| pp         |  3.98 | timeout | timeout | timeout |
+| pyomo1     |  3.54 | timeout | timeout | timeout |
+
+
+#### knapsack
+
+#### nqueens
+
+
+## Replicating Tests
 
 Each test problem directory contains a number of BASH scripts that can
 be used to execute performance tests.  By default, these scripts require
@@ -78,49 +103,17 @@ might type:
 This creates the summary file `pyomo1_py37.csv`, and this tag is included
 in the file to allow comparison for different tests.
 
-## Summarizing Tests
+### Summarizing Tests
 
 The `summarize.py` script can be used to generate tabular summaries of the performance
 tests for a specific problem. For example, if tests have been run for the `pmedian` test problem, then the command
 ```
 python summarize.py pmedian
 ```
-will process the CSV files in the `pmedian` directory and summarize their results.  For example:
-```
-Data Summary: pmedian
+will process the CSV files in the `pmedian` directory and summarize their results and output the result table to terminal.
 
-Runtime Performance (seconds)
-+------------+-------+---------+---------+---------+
-| Modeling   |   160 | 320     | 640     | 1280    |
-|------------+-------+---------+---------+---------|
-| coek       |  0.12 | 0.52    | 2.26    | 9.25    |
-| gurobi     |  0.11 | 0.44    | 1.82    | 7.47    |
-| gurobipy   |  0.51 | 2.09    | 12.37   | 44.23   |
-| ortoolspy  |  0.65 | 2.85    | 12.84   | 55.12   |
-| pulp       |  2.15 | 8.4     | 38.76   | 161.57  |
-| poek       |  1.3  | 3.94    | timeout | timeout |
-| pp         |  3.98 | timeout | timeout | timeout |
-| pyomo1     |  3.54 | timeout | timeout | timeout |
-+------------+-------+---------+---------+---------+
-
-Normalized Performance (relative to Gurobi)
-+------------+-------+---------+---------+---------+
-| Modeling   |   160 | 320     | 640     | 1280    |
-|------------+-------+---------+---------+---------|
-| coek       |  1.09 | 1.18    | 1.24    | 1.24    |
-| gurobi     |  1    | 1.0     | 1.0     | 1.0     |
-| gurobipy   |  7.45 | 7.45    | timeout | timeout |
-| poek       | 11.82 | 8.95    | timeout | timeout |
-| pp         | 36.18 | timeout | timeout | timeout |
-| pyomo1     | 32.18 | timeout | timeout | timeout |
-+------------+-------+---------+---------+---------+
-```
 
 # Installation
-
-This section needs to be updated.
-
-The `Makefile` supports the compilation of all executables within this repository.
 
 
 ## OLD Instructions

@@ -1,4 +1,4 @@
-ortools>=7.4.7247
+ortools>=7.4
 PuLP>=2.0
 pandas>=0.25.3
 # gurobipy>=5.0.2
