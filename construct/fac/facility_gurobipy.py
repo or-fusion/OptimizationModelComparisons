@@ -1,4 +1,5 @@
 import sys
+
 from itertools import product
 
 from gurobipy import Model

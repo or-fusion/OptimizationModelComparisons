@@ -10,6 +10,7 @@ P = int(sys.argv[2])  # Facilities
 
 d = {(n, m): 1.0+1.0/(n+m+1) for n in range(N) for m in range(M)}
 
+
 model = LpProblem("pmedian", LpMinimize)
 
 x = LpVariable.dicts("x", d.keys(), lowBound=0.0, upBound=1.0, cat="Continuous")

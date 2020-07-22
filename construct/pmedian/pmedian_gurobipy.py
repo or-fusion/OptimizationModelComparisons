@@ -1,7 +1,9 @@
 import sys
 from gurobipy import Model
 
+
 random.seed(1000)
+
 
 N = int(sys.argv[1])  # Locations
 M = N  # Customers

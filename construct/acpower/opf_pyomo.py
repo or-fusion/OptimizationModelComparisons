@@ -174,7 +174,6 @@ model.q_load_constr = Constraint(range(nbus), rule=q_load_rule)
 def q_inj_rule(model, k):
     if not bus[k].bustype in [2, 3]:
         return Constraint.Skip
-
     return (bus[k].q_min, \
             bus[k].q_load + \
             sum( model.bus_voltage[k]*model.bus_voltage[branch[i].frm] * \
@@ -189,7 +188,6 @@ model.q_inj_rule = Constraint(range(nbus), rule=q_inj_rule)
 def p_inj_rule(model, k):
     if not bus[k].bustype in [2, 3]:
         return Constraint.Skip
-
     return (0, \
             bus[k].p_load + \
             sum( model.bus_voltage[k]*model.bus_voltage[branch[i].frm] * \
