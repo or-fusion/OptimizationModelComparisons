@@ -8,6 +8,7 @@ else
     timelimit="${TEST_TIMEOUT}s"
 fi
 
+trap '{ echo "You pressed Ctrl-C.  Time to quit." ; exit 1; }' INT
 function run_problem ()
 {
 local name=$1

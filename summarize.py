@@ -19,7 +19,7 @@ for fname in glob.glob(os.path.join(".", sys.argv[1],"*.csv")):
     with open(fname) as csvfile:
         reader = csv.reader(csvfile)
         first=True
-        
+
         for row in reader:
             if first:
                 first=False
@@ -28,13 +28,8 @@ for fname in glob.glob(os.path.join(".", sys.argv[1],"*.csv")):
             else:
                 size = int(row[0])
                 sizes.add(size)
-                if (row[2] == "ok"):
-                    data[problem, size] = round(float(row[1]),2)
-                else:
-                    data[problem, size] = row[2]
-
-results = {}
-results['Modeling'] = []
+                data[problem, size] = round(float(row[1]),2) if (row[2] == "ok") else row[2]
+results = {'Modeling': []}
 for size in sorted(sizes):
     results[str(size)] = []
 for problem in sorted(problems):
@@ -53,7 +48,7 @@ print(tabulate.tabulate(df, headers='keys', tablefmt='psql', showindex="never"))
 
 if "gurobi" in problems:
     for size in sizes:
-        if not ("gurobi",size) in data:
+        if ("gurobi", size) not in data:
             print("Cannot normalize with Gurobi:  missing data")
             sys.exit(0)
         try:
@@ -71,7 +66,7 @@ if "gurobi" in problems:
             except ValueError:
                 # We just skip data that isn't numeric
                 pass
-            i = i+1
+            i += 1
 
     print("")
     print("Normalized Performance (relative to Gurobi)")

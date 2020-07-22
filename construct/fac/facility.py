@@ -20,7 +20,7 @@ def obj_rule(mod):
 model.obj = Objective(rule=obj_rule)
 
 def assmt_rule(mod, i, j):
-    return sum([mod.z[i,j,f] for f in mod.Facs]) == 1
+    return sum(mod.z[i,j,f] for f in mod.Facs) == 1
 model.assmt = Constraint(model.Grid, model.Grid, rule=assmt_rule)
 
 M = 2*1.414
@@ -39,4 +39,3 @@ model.quaddistk2 = Constraint(model.Grid, model.Grid, model.Facs, rule=quaddistk
 def quaddist_rule(mod,i,j,f):
     return mod.r[i,j,f,1]**2 + mod.r[i,j,f,2]**2 <= mod.s[i,j,f]**2
 model.quaddist = Constraint(model.Grid, model.Grid, model.Facs, rule=quaddist_rule)
-
