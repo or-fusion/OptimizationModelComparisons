@@ -1,3 +1,5 @@
+*NOTE: The is the README.md from the original JuMPSupplement code base*
+
 # JuMPSupplement
 Repository containing supplementary materials and code for "JuMP: A Modeling Language for Mathematical Optimization" by I. Dunning, J. Huchette, and M. Lubin.
 
