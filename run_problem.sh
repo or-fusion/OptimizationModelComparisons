@@ -1,7 +1,9 @@
 #!/bin/bash
 
+#
 # NOTE: We want to run final tests with a timeout value of 10m
 # but for development purposes we may use a shorter limit.
+#
 if [ "$TEST_TIMEOUT" == "" ]; then
     timelimit="10m"
 else
