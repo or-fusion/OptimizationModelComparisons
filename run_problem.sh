@@ -1,13 +1,16 @@
 #!/bin/bash
 
+#
 # NOTE: We want to run final tests with a timeout value of 10m
 # but for development purposes we may use a shorter limit.
+#
 if [ "$TEST_TIMEOUT" == "" ]; then
     timelimit="10m"
 else
     timelimit="${TEST_TIMEOUT}s"
 fi
 
+trap '{ echo "You pressed Ctrl-C.  Time to quit." ; exit 1; }' INT
 function run_problem ()
 {
 local name=$1

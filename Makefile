@@ -1,16 +1,20 @@
 all:
-	- cd clnlbeam; make
-	- cd fac; make
-	- cd knapsack; make
-	- cd lqcp; make
-	- cd nqueens; make
-	- cd pmedian; make
+	- cd sandia; make
+	- cd JuMPSupplement; make
+	- cd cute; make
+
+gurobi:
+	- cd sandia; make gurobi
+	- cd JuMPSupplement; make gurobi
+	- cd cute; make gurobi
+
+coek:
+	- cd sandia; make gurobi
+	- cd JuMPSupplement; make gurobi
+	- cd cute; make gurobi
 
 clean:
-	cd clnlbeam; make clean
-	cd fac; make clean
-	cd knapsack; make clean
-	cd lqcp; make clean
-	cd nqueens; make clean
-	cd pmedian; make clean
+	- cd sandia; make clean; cd ..
+	- cd JuMPSupplement; make clean; cd ..
+	- cd cute; make clean; cd ..
 
